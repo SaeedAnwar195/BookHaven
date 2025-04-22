@@ -8,25 +8,25 @@ from auth import auth_bp
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book_haven.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your-secret-key'  # Replace with a secure key
+app.config['SECRET_KEY'] = 'your-secret-key'
 
-# Initialize extensions
+# here i am Initializing the extensions
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
-# Load user for Flask-Login
+# here i am Loading the user for Flask-Login
 from models import User
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Register blueprints
+# here i am Registering the blueprints
 app.register_blueprint(api_bp, url_prefix='/api')
 app.register_blueprint(auth_bp)
 
-# Routes
+# these are the BookHaven Routes
 @app.route('/')
 def index():
     if current_user.is_authenticated:
