@@ -40,7 +40,7 @@ BookHaven/
 1. **Clone the repository**
    ```bash
    git clone https://github.com/SaeedAnwar195/BookHaven.git
-   cd UPBookHaven/BookHaven
+   cd BookHaven/BookHaven
    ```
 
 2. **Create and activate a virtual environment**
@@ -97,4 +97,4 @@ GitHub: [https://github.com/SaeedAnwar195](https://github.com/SaeedAnwar195/)
 
 ---
 
-> “UPBookHaven – because every great mind deserves great books.”
+> “BookHaven – because every great mind deserves great books.”
