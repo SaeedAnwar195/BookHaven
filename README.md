@@ -1,6 +1,6 @@
 # 📚 BookHaven
 
-**BookHaven** is a full-featured Flask web application developed by **Saeed Anwar** for managing an online book catalog platform with both administrative and user interfaces.
+**BookHaven** is a simple Flask web application developed by **Saeed Anwar** for managing an online book catalog platform with both administrative and user interfaces.
 
 ## 🚀 Features
 
