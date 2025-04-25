@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Haven</title>
+</head>
+<body>
+    <h1>Book Haven - Browse Books</h1>
+    <p><a href="{{ url_for('auth.login') }}">Admin Login</a></p>
+
+    <!-- Search and Sort -->
+    <form id="searchForm">
+        <p>
+            <label>Search (Title, Author, ISBN):</label>
+            <input type="text" id="searchQuery">
+        </p>
+        <p>
+            <label>Sort by Price:</label>
+            <select id="sortOption">
+                <option value="">None</option>
+                <option value="price_asc">Low to High</option>
+                <option value="price_desc">High to Low</option>
+            </select>
+        </p>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Book List -->
+    <h2>Books</h2>
+    <div id="bookList"></div>
+
+    <script src="/static/js/user.js"></script>
+</body>
+</html>
