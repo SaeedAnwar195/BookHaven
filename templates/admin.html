@@ -36,6 +36,40 @@
         </form>
     </div>
 
+    <div id="bookSection" style="display: none;">
+        <h2>Manage Books</h2>
+        <form id="bookForm">
+            <input type="hidden" id="bookId">
+            <p>
+                <label>Title:</label>
+                <input type="text" id="title" required>
+            </p>
+            <p>
+                <label>Author:</label>
+                <select id="bookAuthorId" required>
+                    <option value="">Select Author</option>
+                </select>
+            </p>
+            <p>
+                <label>Genre:</label>
+                <input type="text" id="genre">
+            </p>
+            <p>
+                <label>Price:</label>
+                <input type="number" id="price" step="0.01">
+            </p>
+            <p>
+                <label>Stock Quantity:</label>
+                <input type="number" id="stockQuantity">
+            </p>
+            <p>
+                <label>ISBN:</label>
+                <input type="text" id="isbn">
+            </p>
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
+
     <script src="/static/js/admin.js"></script>
 
 </body>
