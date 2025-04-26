@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortSelect   = document.getElementById('sortOption');
     const bookList     = document.getElementById('bookList');
   
-    // Utility to escape HTML in data
     function escapeHtml(str) {
       if (typeof str !== 'string') return '';
       return str
@@ -15,9 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .replace(/'/g, '&#039;');
     }
   
-    // Fetch & render books
     function loadBooks(search = '', sort = '') {
-      // Build URL with only non-empty params
       let url = '/api/books';
       const params = new URLSearchParams();
       if (search) params.set('search', search);
@@ -71,18 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
   
-    // On form submit
     searchForm.addEventListener('submit', e => {
       e.preventDefault();
       loadBooks(searchInput.value.trim(), sortSelect.value);
     });
   
-    // Also reload when sort changes
     sortSelect.addEventListener('change', () => {
       loadBooks(searchInput.value.trim(), sortSelect.value);
     });
   
-    // Initial load
     loadBooks();
   });
   
