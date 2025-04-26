@@ -19,6 +19,23 @@
     <button onclick="showAuthorForm()">Add Author</button>
     <button onclick="showBookForm()">Add Book</button>
 
+
+    <div id="authorSection" style="display: none;">
+        <h2>Manage Authors</h2>
+        <form id="authorForm">
+            <input type="hidden" id="authorEditId">
+            <p>
+                <label>Name:</label>
+                <input type="text" id="authorName" required>
+            </p>
+            <p>
+                <label>Bio:</label>
+                <textarea id="authorBio"></textarea>
+            </p>
+            <button type="submit">Add Author</button>
+        </form>
+    </div>
+
     <script src="/static/js/admin.js"></script>
 
 </body>
