@@ -6,6 +6,22 @@
     <title>Admin - Book Haven</title>
 </head>
 
+<body>
+
+    <h1>Book Haven - Admin Dashboard</h1>
+    <p><a href="{{ url_for('auth.logout') }}">Logout</a></p>
+
+    <h2>Statistics</h2>
+    <p>Total Books: <span id="totalBooks"></span></p>
+    <p>Total Authors: <span id="totalAuthors"></span></p>
+
+    <h2>Actions</h2>
+    <button onclick="showAuthorForm()">Add Author</button>
+    <button onclick="showBookForm()">Add Book</button>
+
+    <script src="/static/js/admin.js"></script>
+
+</body>
 
 
 </html>
