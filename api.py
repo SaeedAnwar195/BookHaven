@@ -47,3 +47,23 @@ def delete_author(id):
     db.session.delete(author)
     db.session.commit()
     return jsonify({'message': 'Author deleted'})
+
+@api_bp.route('/books', methods=['GET'])
+def get_books():
+    search = request.args.get('search', '')
+    sort = request.args.get('sort', '')
+    query = Book.query.join(Author)
+    if search:
+        query = query.filter(
+            db.or_(
+                Book.title.ilike(f'%{search}%'),
+                Author.name.ilike(f'%{search}%'),
+                Book.isbn.ilike(f'%{search}%')
+            )
+        )
+    if sort == 'price_asc':
+        query = query.order_by(Book.price.asc())
+    elif sort == 'price_desc':
+        query = query.order_by(Book.price.desc())
+    books = query.all()
+    return jsonify([book.to_dict() for book in books])
