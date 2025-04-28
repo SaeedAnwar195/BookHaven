@@ -20,3 +20,30 @@ def create_author():
     db.session.add(author)
     db.session.commit()
     return jsonify(author.to_dict()), 201
+
+@api_bp.route('/authors/<int:id>', methods=['GET'])
+def get_author(id):
+    author = Author.query.get_or_404(id)
+    return jsonify(author.to_dict())
+
+@api_bp.route('/authors/<int:id>', methods=['PUT'])
+@login_required
+def update_author(id):
+    author = Author.query.get_or_404(id)
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    author.name = data.get('name', author.name)
+    author.bio = data.get('bio', author.bio)
+    db.session.commit()
+    return jsonify(author.to_dict())
+
+@api_bp.route('/authors/<int:id>', methods=['DELETE'])
+@login_required
+def delete_author(id):
+    author = Author.query.get_or_404(id)
+    if Book.query.filter_by(author_id=id).count() > 0:
+        return jsonify({'error': 'Cannot delete author with associated books'}), 400
+    db.session.delete(author)
+    db.session.commit()
+    return jsonify({'message': 'Author deleted'})
