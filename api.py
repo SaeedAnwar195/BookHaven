@@ -67,3 +67,51 @@ def get_books():
         query = query.order_by(Book.price.desc())
     books = query.all()
     return jsonify([book.to_dict() for book in books])
+
+
+@api_bp.route('/books/<int:id>', methods=['GET'])
+def get_book(id):
+    book = Book.query.get_or_404(id)
+    return jsonify(book.to_dict())
+
+@api_bp.route('/books', methods=['POST'])
+@login_required
+def create_book():
+    data = request.get_json()
+    if not data or not data.get('title') or not data.get('author_id'):
+        return jsonify({'error': 'Title and author_id are required'}), 400
+    book = Book(
+        title=data['title'],
+        author_id=data['author_id'],
+        genre=data.get('genre'),
+        price=data.get('price'),
+        stock_quantity=data.get('stock_quantity'),
+        isbn=data.get('isbn')
+    )
+    db.session.add(book)
+    db.session.commit()
+    return jsonify(book.to_dict()), 201
+
+@api_bp.route('/books/<int:id>', methods=['PUT'])
+@login_required
+def update_book(id):
+    book = Book.query.get_or_404(id)
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    book.title = data.get('title', book.title)
+    book.author_id = data.get('author_id', book.author_id)
+    book.genre = data.get('genre', book.genre)
+    book.price = data.get('price', book.price)
+    book.stock_quantity = data.get('stock_quantity', book.stock_quantity)
+    book.isbn = data.get('isbn', book.isbn)
+    db.session.commit()
+    return jsonify(book.to_dict())
+
+@api_bp.route('/books/<int:id>', methods=['DELETE'])
+@login_required
+def delete_book(id):
+    book = Book.query.get_or_404(id)
+    db.session.delete(book)
+    db.session.commit()
+    return jsonify({'message': 'Book deleted'})
