@@ -115,3 +115,15 @@ def delete_book(id):
     db.session.delete(book)
     db.session.commit()
     return jsonify({'message': 'Book deleted'})
+
+
+
+@api_bp.route('/stats', methods=['GET'])
+@login_required
+def get_stats():
+    total_books = Book.query.count()
+    total_authors = Author.query.count()
+    return jsonify({
+        'total_books': total_books,
+        'total_authors': total_authors
+    })
