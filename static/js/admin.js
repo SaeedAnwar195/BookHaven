@@ -99,5 +99,34 @@ document.addEventListener('DOMContentLoaded', () => {
         return loadAuthors();
     };
 
+    authorForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const id = document.getElementById('authorEditId').value;
+        const data = {
+            name: document.getElementById('authorName').value,
+            bio: document.getElementById('authorBio').value || null
+        };
+        const method = id ? 'PUT' : 'POST';
+        const url    = id ? `/api/authors/${id}` : '/api/authors';
+
+        fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) return res.json().then(err => { throw new Error(err.error); });
+            return res.json();
+        })
+        .then(() => {
+            authorForm.reset();
+            document.getElementById('authorEditId').value = '';
+            authorForm.querySelector('button').textContent = 'Add Author';
+            loadAuthors();
+            loadStats();
+        })
+        .catch(err => alert(err.message));
+    });
+
 
 });
