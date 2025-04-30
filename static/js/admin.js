@@ -128,5 +128,40 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => alert(err.message));
     });
 
+    bookForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const id = document.getElementById('bookId').value;
+        const data = {
+            title: document.getElementById('title').value,
+            author_id: parseInt(authorDropdown.value),
+            genre: document.getElementById('genre').value || null,
+            price: parseFloat(document.getElementById('price').value) || null,
+            stock_quantity: parseInt(document.getElementById('stockQuantity').value) || null,
+            isbn: document.getElementById('isbn').value || null
+        };
+        if (!data.author_id) return alert('Please select an author');
+
+        const method = id ? 'PUT' : 'POST';
+        const url    = id ? `/api/books/${id}` : '/api/books';
+
+        fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) return res.json().then(err => { throw new Error(err.error); });
+            return res.json();
+        })
+        .then(() => {
+            bookForm.reset();
+            document.getElementById('bookId').value = '';
+            bookForm.querySelector('button').textContent = 'Add Book';
+            loadBooks();
+            loadStats();
+        })
+        .catch(err => alert(err.message));
+    });
+
 
 });
