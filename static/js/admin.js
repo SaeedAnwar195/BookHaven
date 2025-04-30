@@ -184,5 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadBooks();
     loadStats();
 
+    const btnAddAuthor = document.getElementById('btnShowAddAuthor');
+    if (btnAddAuthor) btnAddAuthor.addEventListener('click', () => showAuthorForm(false));
+
+    const btnAddBook = document.getElementById('btnShowAddBook');
+    if (btnAddBook) btnAddBook.addEventListener('click', () => showBookForm(false));
 
 });
