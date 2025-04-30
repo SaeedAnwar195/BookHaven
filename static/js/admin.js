@@ -77,5 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    window.showAuthorForm = (isEdit = false) => {
+        authorSection.style.display = 'block';
+        bookSection.style.display   = 'none';
+        if (!isEdit) {
+            authorForm.reset();
+            document.getElementById('authorEditId').value = '';
+            authorForm.querySelector('button').textContent = 'Add Author';
+        }
+    };
+
 
 });
