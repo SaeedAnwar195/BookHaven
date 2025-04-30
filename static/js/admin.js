@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => alert(err.message));
     });
-    
+
     window.editAuthor = id => {
         fetch(`/api/authors/${id}`)
             .then(res => res.json())
@@ -179,6 +179,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
+
+    loadAuthors();
+    loadBooks();
+    loadStats();
 
 
 });
