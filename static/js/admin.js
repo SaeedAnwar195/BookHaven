@@ -64,5 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    function loadStats() {
+        fetch('/api/stats')
+            .then(res => res.json())
+            .then(stats => {
+                totalBooks.textContent   = stats.total_books;
+                totalAuthors.textContent = stats.total_authors;
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Error loading stats');
+            });
+    }
+
 
 });
