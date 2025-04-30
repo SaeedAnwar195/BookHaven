@@ -36,6 +36,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    
+    function loadBooks() {
+        fetch('/api/books')
+            .then(res => res.json())
+            .then(books => {
+                bookList.innerHTML = 
+                    '<table border="1"><tr><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Stock</th><th>ISBN</th><th>Actions</th></tr>' +
+                    books.map(b => `
+                        <tr>
+                            <td>${b.title}</td>
+                            <td>${b.author_name}</td>
+                            <td>${b.genre || ''}</td>
+                            <td>${b.price || ''}</td>
+                            <td>${b.stock_quantity || ''}</td>
+                            <td>${b.isbn || ''}</td>
+                            <td>
+                                <button onclick="editBook(${b.id})">Edit</button>
+                                <button onclick="deleteBook(${b.id})">Delete</button>
+                            </td>
+                        </tr>
+                    `).join('') +
+                    '</table>';
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Error loading books');
+            });
+    }
+
 
 });
