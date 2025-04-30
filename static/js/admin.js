@@ -162,6 +162,23 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => alert(err.message));
     });
+    
+    window.editAuthor = id => {
+        fetch(`/api/authors/${id}`)
+            .then(res => res.json())
+            .then(author => {
+                showAuthorForm(true);
+                document.getElementById('authorEditId').value = author.id;
+                document.getElementById('authorName').value     = author.name;
+                document.getElementById('authorBio').value      = author.bio || '';
+                authorForm.querySelector('button').textContent = 'Update Author';
+            })
+            .catch(err => {
+                console.error('Failed to fetch author', err);
+                alert('Error loading author');
+            });
+    };
+
 
 
 });
