@@ -87,5 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    window.showBookForm = (isEdit = false) => {
+        bookSection.style.display   = 'block';
+        authorSection.style.display = 'none';
+        if (!isEdit) {
+            bookForm.reset();
+            document.getElementById('bookId').value = '';
+            bookForm.querySelector('button').textContent = 'Add Book';
+        }
+        // return the promise so callers can wait for the dropdown
+        return loadAuthors();
+    };
+
 
 });
