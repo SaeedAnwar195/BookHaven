@@ -190,6 +190,29 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => alert(err.message));
     };
 
+    window.editBook = id => {
+        fetch(`/api/books/${id}`)
+            .then(res => res.json())
+            .then(book => {
+                // wait for the dropdown to be loaded, then populate
+                showBookForm(true).then(() => {
+                    document.getElementById('bookId').value        = book.id;
+                    document.getElementById('title').value         = book.title;
+                    document.getElementById('genre').value         = book.genre || '';
+                    document.getElementById('price').value         = book.price || '';
+                    document.getElementById('stockQuantity').value = book.stock_quantity || '';
+                    document.getElementById('isbn').value          = book.isbn || '';
+                    authorDropdown.value                           = book.author_id;
+                    bookForm.querySelector('button').textContent   = 'Update Book';
+                });
+            })
+            .catch(err => {
+                console.error('Failed to fetch book', err);
+                alert('Error loading book');
+            });
+    };
+
+
 
     loadAuthors();
     loadBooks();
