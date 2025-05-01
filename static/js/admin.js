@@ -179,6 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
+    window.deleteAuthor = id => {
+        if (!confirm('Are you sure?')) return;
+        fetch(`/api/authors/${id}`, { method: 'DELETE' })
+            .then(res => {
+                if (!res.ok) return res.json().then(err => { throw new Error(err.error); });
+                loadAuthors();
+                loadStats();
+            })
+            .catch(err => alert(err.message));
+    };
+
 
     loadAuthors();
     loadBooks();
