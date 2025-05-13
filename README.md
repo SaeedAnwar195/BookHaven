@@ -97,4 +97,4 @@ GitHub: [https://github.com/SaeedAnwar195](https://github.com/SaeedAnwar195/)
 
 ---
 
-> “BookHaven – because every great mind deserves great boo.”
+> “BookHaven – because every great mind deserves great book.”
